@@ -16,5 +16,5 @@ subprocess.call(["ifconfig", interface, "down"])
 subprocess.call(["ifconfig", interface, "hw", "ether", Nieuwe_MAC])
 subprocess.call(["ifconfig", interface, "up"])
 
-print(f"[+] MAC adres veranderen voor: interface {interface} naar {Nieuwe_MAC} - :")
+print(f"[+] MAC adres veranderen voor: interface {interface} naar {Nieuwe_MAC} - :\n")
 subprocess.call(["ifconfig", interface])
