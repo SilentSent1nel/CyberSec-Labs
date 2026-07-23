@@ -9,12 +9,12 @@ print("\n")
 
 interface = input("Interface: ")
 Nieuwe_MAC = input("Nieuwe MAC adres: ")
-Oude_MAC = subprocess.check_output(f"ip link show {interface} | awk '/link\\/ether/ {{print $2}}'", shell=True).decode().strip()
+print("\n")
 
 
-subprocess.call(f"ifconfig {interface} down", shell=True)
-subprocess.call(f"ifconfig {interface} hw ether {Nieuwe_MAC}", shell=True)
-subprocess.call(f"ifconfig {interface} up", shell=True)
+subprocess.call(["ifconfig", interface, "down"])
+subprocess.call(["ifconfig", interface, "hw", "ether", Nieuwe_MAC])
+subprocess.call(["ifconfig", interface, "up"])
 
-subprocess.call(f"ifconfig {interface}", shell=True)
-print(f"[+] MAC adres veranderen voor: interface {interface} van {Oude_MAC} naar {Nieuwe_MAC}")
+print(f"[+] MAC adres veranderen voor: interface {interface} naar {Nieuwe_MAC} - :")
+subprocess.call(["ifconfig", interface])
