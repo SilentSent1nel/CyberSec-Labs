@@ -31,9 +31,9 @@ def mac_wijzigen(interface, Nieuwe_MAC):
 
     print(f"{Fore.LIGHTWHITE_EX} [+] MAC adres veranderen voor: interface {Fore.LIGHTRED_EX}{interface}{Style.RESET_ALL} {Fore.LIGHTWHITE_EX} naar: {Fore.LIGHTYELLOW_EX}{Nieuwe_MAC}{Style.RESET_ALL}")
     print(Fore.LIGHTGREEN_EX)
-    subprocess.call(["ifconfig", interface])
-
 
 
 options = argumenten_ophalen()
 mac_wijzigen(options.interface, options.Nieuwe_MAC)
+ifconfig_resultaat = subprocess.check_call(["ifconfig", options.interface])
+print(ifconfig_resultaat)
