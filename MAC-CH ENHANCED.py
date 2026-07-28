@@ -3,6 +3,7 @@
 import subprocess
 import optparse
 from colorama import Fore, Back, Style
+import re
 
 def argumenten_ophalen():
     parser = optparse.OptionParser()
@@ -34,6 +35,13 @@ def mac_wijzigen(interface, Nieuwe_MAC):
 
 
 options = argumenten_ophalen()
-mac_wijzigen(options.interface, options.Nieuwe_MAC)
-ifconfig_resultaat = subprocess.check_call(["ifconfig", options.interface])
+#mac_wijzigen(options.interface, options.Nieuwe_MAC)
+ifconfig_resultaat = subprocess.check_output(["ifconfig", options.interface], text=True)
 print(ifconfig_resultaat)
+mac_adres_zoekresultaat = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_resultaat)
+print(f"{Fore.LIGHTYELLOW_EX}{Style.RESET_ALL}Je nieuwe MAC Adres:")
+
+if mac_adres_zoekresultaat:
+    print(mac_adres_zoekresultaat.group(0))
+else:
+    print("[-] MAC Adres kon niet worden gelezen")
