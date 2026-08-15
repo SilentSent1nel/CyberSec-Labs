@@ -33,15 +33,18 @@ def mac_wijzigen(interface, Nieuwe_MAC):
     print(f"{Fore.LIGHTWHITE_EX} [+] MAC adres veranderen voor: interface {Fore.LIGHTRED_EX}{interface}{Style.RESET_ALL} {Fore.LIGHTWHITE_EX} naar: {Fore.LIGHTYELLOW_EX}{Nieuwe_MAC}{Style.RESET_ALL}")
     print(Fore.LIGHTGREEN_EX)
 
+def huidige_mac_ophalen(interface):
+    ifconfig_resultaat = subprocess.check_output(["ifconfig", interface], text=True)
+    mac_adres_zoekresultaat = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_resultaat)
+    print(f"{Fore.LIGHTYELLOW_EX}{Style.RESET_ALL}Je nieuwe MAC Adres:")
+
+    if mac_adres_zoekresultaat:
+        return mac_adres_zoekresultaat.group(0)
+    else:
+        print("[-] MAC Adres kon niet worden gelezen")
 
 options = argumenten_ophalen()
-#mac_wijzigen(options.interface, options.Nieuwe_MAC)
-ifconfig_resultaat = subprocess.check_output(["ifconfig", options.interface], text=True)
-print(ifconfig_resultaat)
-mac_adres_zoekresultaat = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_resultaat)
-print(f"{Fore.LIGHTYELLOW_EX}{Style.RESET_ALL}Je nieuwe MAC Adres:")
+huidige_mac = huidige_mac_ophalen(options.interface)
+print("Huidige MAC: " + str(huidige_mac))
 
-if mac_adres_zoekresultaat:
-    print(mac_adres_zoekresultaat.group(0))
-else:
-    print("[-] MAC Adres kon niet worden gelezen")
+#mac_wijzigen(options.interface, options.Nieuwe_MAC)
