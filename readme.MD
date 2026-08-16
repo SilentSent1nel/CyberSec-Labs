@@ -10,8 +10,18 @@ Deze projecten zijn ENKEL bedoeld voor educatieve doeleinden en worden uitsluite
 |---|---|---|
 | MAC Address Changer | Het MAC-adres van een netwerkinterface wijzigen en controleren | Voltooid |
 | Netwerkscanner | Apparaten binnen een netwerk ontdekken | Gepland |
+| ARP Spoofer | ARP spoofing | Gepland |
 | Packet Sniffer | Netwerkverkeer onderscheppen + analyseren | Gepland |
+| DNS Spoofer | DNS Spoofing | Gepland |
+| File interceptor | Bestanden onderscheppen | Gepland |
+| Code injector | Code injecteren | Gepland |
 | ARP Spoof Detector | Mogelijke ARP spoofing detecteren | Gepland |
+| Malware || Gepland |
+| Malware - Keylogger | Toetsenstroken onderscheppen | Gepland |
+| Malware - Backdoors | Achterdeur voor toegang in de toekomst | Gepland |
+| Malware - Packaging | Verpakken en analyseren | Gepland |
+| Crawler | Webpagina's autoimatisch doorzoeken en verzamelen van informatie | Gepland |
+| Login informatie raden | Geautomatiseerde loginpogingen | Gepland |
 | Kwetsbaarheidsscanner | Mogelijke kwetsbaarheden detecteren | Gepland |
 
 ## Doelen
