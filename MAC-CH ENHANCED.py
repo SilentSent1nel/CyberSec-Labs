@@ -24,27 +24,32 @@ def argumenten_ophalen():
 
 
 def mac_wijzigen(interface, Nieuwe_MAC):
-    print("\n")
-
     subprocess.call(["ifconfig", interface, "down"])
     subprocess.call(["ifconfig", interface, "hw", "ether", Nieuwe_MAC])
     subprocess.call(["ifconfig", interface, "up"])
 
-    print(f"{Fore.LIGHTWHITE_EX} [+] MAC adres veranderen voor: interface {Fore.LIGHTRED_EX}{interface}{Style.RESET_ALL} {Fore.LIGHTWHITE_EX} naar: {Fore.LIGHTYELLOW_EX}{Nieuwe_MAC}{Style.RESET_ALL}")
-    print(Fore.LIGHTGREEN_EX)
+    print(f"{Fore.LIGHTWHITE_EX}[+] MAC adres veranderen voor: interface {Fore.LIGHTRED_EX}{interface}{Style.RESET_ALL} {Fore.LIGHTWHITE_EX} naar: {Fore.LIGHTYELLOW_EX}{Nieuwe_MAC}{Style.RESET_ALL}")
 
 def huidige_mac_ophalen(interface):
     ifconfig_resultaat = subprocess.check_output(["ifconfig", interface], text=True)
     mac_adres_zoekresultaat = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_resultaat)
-    print(f"{Fore.LIGHTYELLOW_EX}{Style.RESET_ALL}Je nieuwe MAC Adres:")
+
 
     if mac_adres_zoekresultaat:
         return mac_adres_zoekresultaat.group(0)
     else:
         print("[-] MAC Adres kon niet worden gelezen")
 
-options = argumenten_ophalen()
-huidige_mac = huidige_mac_ophalen(options.interface)
-print("Huidige MAC: " + str(huidige_mac))
 
-#mac_wijzigen(options.interface, options.Nieuwe_MAC)
+options = argumenten_ophalen()
+
+huidige_mac = huidige_mac_ophalen(options.interface)
+print("\nHuidige MAC: " + str(huidige_mac))
+
+mac_wijzigen(options.interface, options.Nieuwe_MAC)
+
+huidige_mac = huidige_mac_ophalen(options.interface)
+if huidige_mac == options.Nieuwe_MAC:
+    print(f"{Style.RESET_ALL}[+] MAC-Adres gewijzigd naar: {Fore.LIGHTBLUE_EX}{huidige_mac}")
+else:
+    print(f"MAC-Adres is niet gewijzigd")
