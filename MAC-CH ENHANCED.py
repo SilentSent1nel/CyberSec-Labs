@@ -32,7 +32,7 @@ def mac_wijzigen(interface, Nieuwe_MAC):
 
 def huidige_mac_ophalen(interface):
     ifconfig_resultaat = subprocess.check_output(["ifconfig", interface], text=True)
-    mac_adres_zoekresultaat = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_resultaat)
+    mac_adres_zoekresultaat = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", str(ifconfig_resultaat))
 
 
     if mac_adres_zoekresultaat:
